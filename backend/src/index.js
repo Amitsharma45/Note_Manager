@@ -9,7 +9,7 @@ require('dotenv').config()
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('api/v1',router)
+app.use('/api/v1',router)
 
 
 
