@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Appbar from './Components/Appbar/Appbar';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,Navigate } from 'react-router-dom';
 import Loader from './Components/Loader/Loader';
 import { useEffect } from 'react';
+import Home from './Components/Home/Home';
+
 
 function App() {
   const [loading, setloading] = useState(true);
-  const [darkMode, setdarkMode] = useState(false);
+  const [darkMode, setdarkMode] = useState(true);
   const toggleMode = () => {
     setdarkMode(!darkMode);
   }
@@ -16,17 +18,24 @@ function App() {
     }, 1100);
   }, [])
   return (
-    <div className={`bg-gray-200 h-screen  ${darkMode ? 'dark' : ''}`} >
-      {
-        loading === true ? (
-          <Loader />
-        ) : (
+    <div className={`${darkMode ? 'dark' : ''} `} >
+      <div className='relative h-full bg-gray-300 dark:bg-slate-800'>
+        {
+          loading === true ? (
+            <Loader />
+          ) : (
+            <>
+              <Appbar toggleMode={toggleMode} />
+              <Routes  >
+              <Route path="/" element={<Navigate to="/home" />} />
+                <Route path='/home' element={<Home />} />
+              </Routes>
+            </>
+          )
+        }
+      </div>
 
-          <Routes  >
-            <Route path='/' element={<Appbar toggleMode={toggleMode} />} />
-          </Routes>
-        )
-      }
+
     </div >
   );
 }
