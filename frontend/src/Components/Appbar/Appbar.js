@@ -4,22 +4,17 @@ import React, { useState } from 'react'
 import logo from '../Images/logo.png'
 export default function Appbar(props) {
     const [mode, setmode] = useState(true);
-    const [menu, setmenu] = useState(true);
     return (
         <>
-            <nav className={`w-full ${menu? 'h-[50px]': 'h-[200px]'} md:h-[50px] overflow-hidden transition-all ease-in-out duration-300 bg-slate-400  px-4 md:px-6 dark:bg-slate-900   `}>
+            <nav className={`w-full h-[50px] md:h-[50px] overflow-hidden z-10 bg-white  px-4 md:px-6 dark:bg-slate-900   `}>
                 <div className='h-[50px] flex justify-between items-center'>
                     <div className='text-slate-800 font-bold text-xl flex cursor-pointer dark:text-white'>
                         <img className='h-8 w-9 mr-3' src={logo} />
                         Task Manager
                     </div>
-                    <ul className='md:flex justify-between items-center  hidden'>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>Home</li>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>About</li>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>Contact</li>
-                    </ul>
+
                     <div className='flex cursor-pointer items-center'>
-                        <div className='mr-6' onClick={() => {
+                        <div className='md:mr-6 mr-12' onClick={() => {
                             setmode(!mode)
                             props.toggleMode()
                         }}>
@@ -31,48 +26,8 @@ export default function Appbar(props) {
                                 )
                             }
                         </div>
-                        <div className='font-semibold bg-slate-600 px-4 py-1 rounded-[10px] text-white dark:bg-gray-600 hidden md:block '>
-                            Login
-                        </div>
-                        <div className='text-4xl mr-2 text-slate-900 dark:text-white md:hidden  block' onClick={() => setmenu(!menu)}>
-                        <button className="text-white" onClick={() => setmenu(!menu)}>
-                            <svg
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                {!menu ? (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                ) : (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M4 6h16M4 12h16m-7 6h7"
-                                    />
-                                )}
-                            </svg>
-                        </button>
-                        </div>
-
 
                     </div>
-                </div>
-                <div className={` md:hidden   pb-5 mt-4 transition-opacity duration-700 `}>
-                    <ul className='flex flex-col justify-between items-center  '>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>Home</li>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>About</li>
-                        <li className='mx-4 text-slate-900 font-semibold cursor-pointer dark:text-white'>Contact</li>
-                        <li className='font-semibold bg-slate-600 px-4 py-1 rounded-[10px] text-white dark:bg-gray-600  mt-1'>
-                            Login
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </>

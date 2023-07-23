@@ -20,7 +20,7 @@ function App() {
   }, [])
   return (
     <div className={`${darkMode ? 'dark' : ''} `} >
-      <div className='relative h-full bg-gray-300 dark:bg-slate-800'>
+      <div className='relative h-full bg-[#f1f4fb] dark:bg-slate-800'>
         {
           loading === true ? (
             <Loader />
