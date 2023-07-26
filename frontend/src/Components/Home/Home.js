@@ -1,7 +1,7 @@
 import React from 'react'
 import SideBar from '../SideBar/SideBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays,faTableCellsLarge,faList } from '@fortawesome/free-solid-svg-icons';
 import AddNote from '../AddNote/AddNote';
 export default function Home() {
 
@@ -15,8 +15,12 @@ export default function Home() {
                 </div>
                 <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 '>
                     <AddNote />
-                    <div className='  dark:bg-slate-700 bg-[#fefefe] rounded-xl  '>
-                        <div className='flex flex-wrap lg:justify-around items-center justify-center m-5 '>
+                    <div className=' mt-8 dark:bg-slate-700 bg-[#fefefe] rounded-xl  '>
+                        <div className='text-end dark:text-white text-2xl mr-5 pt-5'>
+                        {/* <FontAwesomeIcon icon={faTableCellsLarge} className='mr-1'/> */}
+                        <FontAwesomeIcon icon={faList} />
+                        </div>
+                        <div className='flex flex-wrap lg:justify-around items-center justify-center m-5 mt-2'>
                             {
                                 data.map((i) =>
                                     <div className='md:w-[350px] w-[300px] overflow-hidden h-min-[250px]  border-black bg-[#FBFBFB]  dark:bg-black dark:bg-opacity-10 dark:text-white text-slate-800  rounded-xl my-5 '>
