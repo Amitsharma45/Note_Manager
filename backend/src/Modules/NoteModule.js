@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const NoteSchema = mongoose.Schema({
     _id: {
         required: true,
-        type: Number
+        type: String
     },
     notes: [
         {
-            _id: Number,
+            _id: String,
             tittle: String,
             notebody: String
         }
