@@ -7,12 +7,18 @@ const NoteSchema = mongoose.Schema({
     },
     notes: [
         {
-            _id: String,
-            tittle: String,
-            notebody: String
+            type: new mongoose.Schema({
+
+                _id: String,
+                tittle: String,
+                notebody: String
+            }
+            , { timestamps: true }
+            )
         }
     ]
 
 }, { timestamps: true });
 
 module.exports = mongoose.model('Notes', NoteSchema);
+
