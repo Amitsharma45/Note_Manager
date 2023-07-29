@@ -3,7 +3,8 @@ const app= express();
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const {router} = require('./Routers/router')
+const {router} = require('./Routers/router');
+const cors = require('cors')
 require('dotenv').config()
 // connecting mongoose database
 
@@ -13,12 +14,11 @@ mongoose.connection.once('open', () => {
 })
 
 //middle ware
+app.use(cors())
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1',router)
-
-
 
 
 app.listen(process.env.PORT,()=>{

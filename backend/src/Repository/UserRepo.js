@@ -39,7 +39,7 @@ const createNote = (req) => {
 
 const getNotes = (req) => {
     return new Promise((resole, reject) => {
-        NoteModule.find({ _id: req.query._id })
+        NoteModule.findOne({ _id: req.query._id })
             .then((data) => {
                 resole(data);
             })
@@ -61,4 +61,7 @@ const deleteNote = (req) => {
 
     })
 }
+
+
+
 module.exports = { createNote, getNotes, deleteNote };

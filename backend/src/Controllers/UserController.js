@@ -1,6 +1,7 @@
 const repo = require('../Repository/UserRepo')
 
 const createNote = (req, res) => {
+    console.log(req.body)
     repo.createNote(req).then((data) => {
         res.status(200).send({
             status: 200,
@@ -15,11 +16,7 @@ const createNote = (req, res) => {
 const getNotes = (req, res) => {
     repo.getNotes(req)
         .then((data) => {
-            res.status(200).send({
-                status: 200,
-                data: data
-            })
-
+            res.status(200).send(data)
         })
         .catch((err) => {
             res.status(404).send(err)

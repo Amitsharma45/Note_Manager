@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
+import { useAddNoteMutation } from '../../Feature/ApiSlice';
+
 
 function AddNote() {
     const [toogle, settoogle] = useState(false);
+    const [cretaNote] = useAddNoteMutation()
     const [newnote, setnote] = useState({
         tittle: '',
         notebody: ''
     })
     const SaveNote = async (e) => {
         e.preventDefault();
-        console.log(newnote)
+        console.log(newnote);
+        cretaNote({...newnote,_id:'bc8aa2-69-4deb-a9b2-d0896e489178'})
         settoogle(false)
         setnote({
             tittle: '',
