@@ -22,6 +22,16 @@ const getNotes = (req, res) => {
             res.status(404).send(err)
         })
 }
+const updateNote = (req, res) => {
+    console.log(req.body)
+    repo.updateNote(req)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            res.status(404).send('err')
+        })
+}
 
 const deleteNote = (req, res) => {
     repo.deleteNote(req)
@@ -30,7 +40,7 @@ const deleteNote = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
-            res.status(404).send("")
+            res.status(404).send("Error")
         })
 }
-module.exports = { createNote, getNotes,deleteNote }
+module.exports = { createNote, getNotes, deleteNote ,updateNote }

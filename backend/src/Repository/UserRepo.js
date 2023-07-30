@@ -49,6 +49,21 @@ const getNotes = (req) => {
     })
 }
 
+const updateNote =(req) =>{
+
+    return new Promise((resole,reject)=>{
+        NoteModule.findOneAndUpdate({_id :req.body._id},{ $set: { "notes.$[elem].tittle": req.body.tittle,"notes.$[elem].notebody": req.body.notebody } },
+        { arrayFilters: [{ "elem._id": req.body.noteid }], new: true })
+        .then((data)=>{
+            resole(data);
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    });
+
+}
+
 const deleteNote = (req) => {
     return new Promise((resolve, reject) => {
         NoteModule.findOneAndUpdate({ _id: req.body._id }, { $pull: { notes: { _id: req.body.noteid } } })
@@ -64,4 +79,4 @@ const deleteNote = (req) => {
 
 
 
-module.exports = { createNote, getNotes, deleteNote };
+module.exports = { createNote, getNotes, deleteNote , updateNote};

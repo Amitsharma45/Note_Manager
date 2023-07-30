@@ -5,9 +5,11 @@ import { faCalendarDays, faTableCellsLarge, faList } from '@fortawesome/free-sol
 import AddNote from '../AddNote/AddNote';
 import {useGetNotesQuery} from '../../Feature/ApiSlice';
 import moment from 'moment';
+import Loader from '../Loader/Loader'
 
 export default function Home() {
     const { data, error, isLoading } =  useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178')
+    
     return (
         <>
 
@@ -28,7 +30,7 @@ export default function Home() {
                                     <div className='md:w-[350px] w-[300px] overflow-hidden h-min-[250px]  border-black bg-[#FBFBFB]  dark:bg-black dark:bg-opacity-10 dark:text-white text-slate-800  rounded-xl my-5 '>
                                         <div className='border-b-[1px] px-5 pt-4 pb-2 text-xl'>{i.tittle}</div>
                                         
-                                        <div className='px-5 py-5'>
+                                        <div className='px-5 py-5 h-[180px]'>
                                         {i.notebody}
                                         </div>
                                         <div className='border-t-[1px] px-5 py-3 text-right dark:bg-slate-800 '>

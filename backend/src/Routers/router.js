@@ -9,6 +9,8 @@ router.get('/getNotes',userControler.getNotes)
 //  add note in  database
 router.post('/createNote',userControler.createNote);
 
+// Update note by note id
+router.put('/updateNote',userControler.updateNote)
 // delete note by note _id
 router.delete('/deleteNote',userControler.deleteNote)
 
