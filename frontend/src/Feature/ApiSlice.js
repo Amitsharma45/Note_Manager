@@ -19,11 +19,12 @@ export const noteApi = createApi({
             invalidatesTags : ['Notes'],
         }),
         deleteNote: builder.mutation({
-            query: ({id})=>({
-                url:`/delete/${id}`,
+            query: (id)=>({
+                url:`/deleteNote`,
                 method:'DELETE',
                 body:id
-            })
+            }),
+            invalidatesTags : ['Notes'],
         }),
         updateNote: builder.mutation({
             query: (note)=>({

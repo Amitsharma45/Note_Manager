@@ -4,7 +4,7 @@ import { Route, Routes,Navigate } from 'react-router-dom';
 import Loader from './Components/Loader/Loader';
 import { useEffect } from 'react';
 import Home from './Components/Home/Home';
-
+import './App.css'
 
 
 function App() {

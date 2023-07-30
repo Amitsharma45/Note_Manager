@@ -34,6 +34,7 @@ const updateNote = (req, res) => {
 }
 
 const deleteNote = (req, res) => {
+    console.log(req.body)
     repo.deleteNote(req)
         .then((data) => {
             res.status(200).send(data)
