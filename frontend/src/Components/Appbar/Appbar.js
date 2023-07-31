@@ -6,7 +6,7 @@ export default function Appbar(props) {
     const [mode, setmode] = useState(true);
     return (
         <>
-            <nav className={`w-full h-[50px] md:h-[50px] overflow-hidden z-10 bg-white  px-4 md:px-6 dark:bg-slate-900   `}>
+            <nav className={`w-full h-[50px] md:h-[50px] overflow-hidden z-10 bg-primaryligth  px-4 md:px-6 dark:bg-slate-900   `}>
                 <div className='h-[50px] flex justify-between items-center'>
                     <div className='text-slate-800 font-bold text-xl flex cursor-pointer dark:text-white'>
                         <img className='h-8 w-9 mr-3' src={logo} />

@@ -26,7 +26,10 @@ const updateNote = (req, res) => {
     console.log(req.body)
     repo.updateNote(req)
         .then((data) => {
-            res.status(200).send(data);
+            res.status(200).send({
+                status:200,
+                message:data
+            });
         })
         .catch((err) => {
             res.status(404).send('err')

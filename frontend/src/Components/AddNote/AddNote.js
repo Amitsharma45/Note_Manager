@@ -1,46 +1,59 @@
 import React, { useState } from 'react'
 import { useAddNoteMutation } from '../../Feature/ApiSlice';
+import { toast } from 'react-toastify';
 
-
-function AddNote() {
-    const [toogle, settoogle] = useState(false);
+function AddNote(props) {
+    const { addclose } = props;
     const [cretaNote] = useAddNoteMutation()
     const [newnote, setnote] = useState({
         tittle: '',
         notebody: ''
     })
-    const SaveNote = async (e) => {
-        e.preventDefault();
+    const SaveNote =  () => {
         console.log(newnote);
-        cretaNote({...newnote,_id:'bc8aa2-69-4deb-a9b2-d0896e489178'})
-        settoogle(false)
+        cretaNote({ ...newnote, _id: 'bc8aa2-69-4deb-a9b2-d0896e489178' })
+            .then((resp) => {
+                toast.success('Add Note Success', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            })
+        addclose(false)
         setnote({
             tittle: '',
             notebody: ''
         });
     }
-    const CancelNote = (e) => {
-        e.preventDefault();
-        settoogle(false)
+    const CancelNote = () => {
+        addclose(false)
         setnote({
             tittle: '',
             notebody: ''
         });
     }
     return (
-        <div className='flex flex-col items-center justify-center '>
-            <form className='flex flex-col items-center justify-center   md:w-[500px] w-[350px] relative  '>
-                <textarea onClick={() => settoogle(true)} type='text' className=' md:w-[500px] w-[350px] mt-5 h-[50px] dark:bg-slate-700  dark:text-white pt-2 pl-4  border-0 border-b-[.5px] dark:border-slate-900 resize-none outline-none' placeholder={`${toogle ? ' Note Tittle' : 'Add Note'}`} value={newnote.tittle} onChange={(e) => { setnote({ ...newnote, tittle: e.target.value }) }} />
-                <textarea rows="8" cols="100" type='text ' className={`md:w-[500px] w-[350px] dark:bg-slate-700  dark:text-white pl-4 border-gray-900 border-0 text resize-none outline-none  relative ${toogle ? 'h-[200px] pt-2' : 'h-[0px] pt-0'} transition-all ease-in-out duration-500  `} placeholder='Note Body ...' value={newnote.notebody} onChange={(e) => { setnote({ ...newnote, notebody: e.target.value }) }} />
-                <div className={`${toogle ? 'block' : 'hidden'} dark:text-white absolute bottom-2 right-0`}>
+
+        <div className='absolute  h-full w-full bg-black bg-opacity-50 top-0 left-0 z-10  text-white  flex justify-center pt-[130px]'>
+            <div className='animate-slide-in  bg-slate-700 h-[365px] w-[510px]  pt-3 pl-4 rounded-md' >
+                <div className='font-semibold text-2xl '>Add Note :-</div>
+                <textarea type='text' className='mb-0 placeholder:text-xl text-[18px] font-semibold placeholder:text-slate-900 md:w-[480px] w-[350px] mt-5 h-[50px] dark:bg-slate-400 bg-[#C0DFD9] text-black dark:text-slate-900 pt-2 pl-4   dark:border-slate-900 resize-none outline-none' placeholder='Tittle Note..' value={newnote.tittle} onChange={(e) => { setnote({ ...newnote, tittle: e.target.value }) }} />
+                <textarea rows="8" cols="100" type='text ' className={`placeholder:text-xl font-semibold placeholder:text-slate-900 bg-[#C0DFD9] mt-0 text-black md:w-[480px] w-[350px] dark:bg-slate-400  dark:text-slate-900 pl-4 border-gray-900 border-0 text resize-none outline-none  relative h-[200px] pt-2   `} placeholder='Note Body ...' value={newnote.notebody} onChange={(e) => { setnote({ ...newnote, notebody: e.target.value }) }} />
+                <div className={` dark:text-white text-right bottom-2 right-0 mt-1`}>
                     <button type='button' disabled={!newnote.title && !newnote.notebody} className='mx-1 text-sm dark:bg-slate-900 px-3 py-1 rounded-2xl  disabled:opacity-30'
-                        onClick={(e) => SaveNote(e)}>
+                        onClick={() => SaveNote()}
+                    >
                         Save</button>
-                    <button className='mx-1 text-sm dark:bg-slate-900 px-3 py-1 rounded-2xl' onClick={(e) => CancelNote(e)} >
+                    <button className='mx-1 text-sm dark:bg-slate-900 px-3 py-1 rounded-2xl' onClick={() => CancelNote()} >
                         Cancel
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

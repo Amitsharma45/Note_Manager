@@ -4,7 +4,7 @@ import { faNotesMedical, faArrowRightFromBracket,faTrashCan,faThumbtack,faShare 
 export default function SideBar() {
     const [menu, setmenu] = React.useState(true);
     return (
-        <div className={`md:w-auto ${menu ? 'w-[50px]' : 'w-[300px]'}  rounded-xl dark:bg-slate-700 bg-white   transition-transform ease-in-out duration-300 `}>
+        <div className={`md:w-auto ${menu ? 'w-[50px]' : 'w-[300px]'}  rounded-xl dark:bg-slate-700 bg-secondarylight   transition-transform ease-in-out duration-300 `}>
             <div className='text-4xl h-[50px] px-2 text-slate-900 dark:text-white md:hidden  block bg-white dark:bg-slate-900' >
                 <button className="text-white" onClick={() => setmenu(!menu)}>
                     <svg

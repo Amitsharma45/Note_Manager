@@ -53,9 +53,9 @@ const updateNote =(req) =>{
 
     return new Promise((resole,reject)=>{
         NoteModule.findOneAndUpdate({_id :req.body._id},{ $set: { "notes.$[elem].tittle": req.body.tittle,"notes.$[elem].notebody": req.body.notebody } },
-        { arrayFilters: [{ "elem._id": req.body.noteid }], new: true })
+        { arrayFilters: [{ "elem._id": req.body.noteid }] })
         .then((data)=>{
-            resole(data);
+            resole("Update Success");
         })
         .catch((err)=>{
             reject(err)

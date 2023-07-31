@@ -9,7 +9,7 @@ import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import { Provider } from 'react-redux';
 import { store } from './Feature/Store';
 import { noteApi } from './Feature/ApiSlice';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

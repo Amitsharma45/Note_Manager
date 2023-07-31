@@ -6,9 +6,24 @@ module.exports = {
   ],
   theme: {
     extend: {
-      color:{
-        'sharme':'#0000'
-      }
+      colors: {
+        primaryligth: '#AAB8B6',
+        secondarylight:'#BCCBC9',
+        inputlight:'#E9ECE6'
+      },
+      keyframes: {
+        slideIn: {
+          'from': {
+            transform: 'translateY(-50%)',
+          },
+          'to': {
+            transform: 'translateY(0%)',
+          },
+        }
+      },
+      animation: {
+        'slide-in': 'slideIn .50s ease-in-out',
+      },
     },
   },
   plugins: [],

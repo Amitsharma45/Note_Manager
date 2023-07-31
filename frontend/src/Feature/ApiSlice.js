@@ -8,7 +8,11 @@ export const noteApi = createApi({
     endpoints: (builder) =>({
         getNotes: builder.query({
            query: (id)=> `/getNotes?_id=${id}`,
-           providesTags :['Notes']
+           providesTags :['Notes'],
+           transformResponse:(response)=>{
+            response.notes.reverse();
+            return response
+           }
         }),
         addNote: builder.mutation({
             query: (note)=>({
@@ -28,10 +32,11 @@ export const noteApi = createApi({
         }),
         updateNote: builder.mutation({
             query: (note)=>({
-                url:`/update/${note.id}`,
+                url:`/updateNote`,
                 method:"PUT",
                 body: note
-            })
+            }),
+            invalidatesTags : ['Notes'],
         })
     })
 })
