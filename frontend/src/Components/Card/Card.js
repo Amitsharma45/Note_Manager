@@ -4,16 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faEllipsisVertical, faPenToSquare, faTrashCan, faHeart, faTemperatureHalf } from '@fortawesome/free-solid-svg-icons';
 import { useDeleteNoteMutation } from '../../Feature/ApiSlice';
 import EditNote from '../EditNote/EditNote';
-
+import { toast } from 'react-toastify';
 
 function Card(props) {
     const { item } = props
+    
     const [editToggle, seteditToggle] = useState(false)
     const [deleteNote] = useDeleteNoteMutation();
     const DeleteNote = (noteid) => {
         deleteNote({
             "_id": "bc8aa2-69-4deb-a9b2-d0896e489178",
             "noteid": noteid
+        }).then((data) => {
+            toast.success('Note Delete Success', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         })
     }
     function editclose() {
@@ -30,7 +42,10 @@ function Card(props) {
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
                         <ul className="dropdown-menu absolute hidden w-[100px] rounded-md bg-gray-300 py-1 dark:text-white dark:bg-slate-900 text-[16px]   left-[-60px]">
-                            <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3" onClick={() => seteditToggle(!editToggle)} >
+                            <li className="block scroll-smooth cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3" onClick={() => {
+                                seteditToggle(!editToggle)
+                                window.scrollTo(0, 0)
+                            }} >
                                 <FontAwesomeIcon icon={faPenToSquare} className='mr-2' />Edit
                             </li>
                             <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3 " onClick={() => DeleteNote(item._id)} >
