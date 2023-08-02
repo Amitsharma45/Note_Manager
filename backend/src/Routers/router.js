@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const UserModle = require('../Modules/UserModule');
-const userControler = require('../Controllers/UserController')
+const userControler = require('../Controllers/UserController');
+{
+    // Create user;
+    // login user;
+    // log out user;
+    // forgot password
+    // changer password
+}
 
 // get all notes of user by _id
 router.get('/',(req,res)=>{

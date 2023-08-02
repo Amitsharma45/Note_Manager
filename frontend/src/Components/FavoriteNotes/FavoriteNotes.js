@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { useGetNotesQuery } from '../../Feature/ApiSlice';
@@ -7,6 +7,13 @@ import { DotWave } from '@uiball/loaders'
 export default function FavoriteNote() {
 
     const { data, isLoading } = useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178')
+    
+    const [favdata,setfavdata] =useState([]);
+    useEffect(()=>{
+        const temp = data?.notes.filter((i)=>i.isFavorite === true )
+        setfavdata(temp)
+    },[data])
+    console.log(favdata)
 
     function isFavorite(item) {
         if (item.isFavorite) {
@@ -35,10 +42,10 @@ export default function FavoriteNote() {
                         ) : (
                             <>
                                 {
-                                    data?.notes !== undefined && data?.notes?.length !== 0  ? (
+                                    favdata !== undefined && favdata?.length !== 0  ? (
                                         <>
                                             {
-                                                data !== undefined && data?.notes?.map((item) =>
+                                                favdata !== undefined && favdata?.map((item) =>
                                                     isFavorite(item)
                                                 )
                                             }
