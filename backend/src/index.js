@@ -8,7 +8,7 @@ const cors = require('cors')
 require('dotenv').config()
 // connecting mongoose database
 
-mongoose.connect('mongodb://localhost:27017/TaskManager');
+mongoose.connect('mongodb+srv://mongoadmin:amit1234@cluster0.ny6ohvf.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.once('open', () => {
     console.log('Mongodb connected')
 })

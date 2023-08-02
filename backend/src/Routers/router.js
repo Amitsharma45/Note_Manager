@@ -4,6 +4,9 @@ const UserModle = require('../Modules/UserModule');
 const userControler = require('../Controllers/UserController')
 
 // get all notes of user by _id
+router.get('/',(req,res)=>{
+    res.send('running')
+})
 router.get('/getNotes',userControler.getNotes)
 
 //  add note in  database
