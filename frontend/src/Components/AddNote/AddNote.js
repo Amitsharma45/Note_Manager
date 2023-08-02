@@ -13,7 +13,6 @@ function AddNote() {
         notebody: ''
     })
     const SaveNote = () => {
-        console.log(newnote);
         cretaNote({ ...newnote, _id: 'bc8aa2-69-4deb-a9b2-d0896e489178' })
             .then((resp) => {
                 toast.success('Add Note Success', {

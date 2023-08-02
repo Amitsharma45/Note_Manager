@@ -7,9 +7,7 @@ import EditNote from '../EditNote/EditNote';
 import { toast } from 'react-toastify';
 
 function Card(props) {
-    const { item } = props
-    console.log(item.isFavorite)
-
+    const { item } = props;
     const [editToggle, seteditToggle] = useState(false)
     const [deleteNote] = useDeleteNoteMutation();
     const [updateFavorite] = useIsFavoriteNoteMutation();

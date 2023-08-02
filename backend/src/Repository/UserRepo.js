@@ -45,7 +45,13 @@ const getNotes = (req) => {
     return new Promise((resole, reject) => {
         NoteModule.findOne({ _id: req.query._id })
             .then((data) => {
-                resole(data);
+                if(data){
+                    resole(data);
+                }
+                resole([{
+                    message:'Not Data',
+                    notes: []
+                }])
             })
             .catch((err) => {
                 reject('SomeThing went wrong')
