@@ -37,8 +37,24 @@ export const noteApi = createApi({
                 body: note
             }),
             invalidatesTags : ['Notes'],
+        }),
+        isFavoriteNote: builder.mutation({
+            query: (note)=>({
+                url:`/favoriteNote`,
+                method:"PUT",
+                body: note
+            }),
+            invalidatesTags : ['Notes'],
+        }),
+        isArchiveNote: builder.mutation({
+            query: (note)=>({
+                url:`/archiveNote`,
+                method:"PUT",
+                body: note
+            }),
+            invalidatesTags : ['Notes'],
         })
     })
 })
 
-export const {useGetNotesQuery, useAddNoteMutation ,useDeleteNoteMutation, useUpdateNoteMutation} = noteApi;
+export const {useGetNotesQuery, useIsArchiveNoteMutation , useIsFavoriteNoteMutation, useAddNoteMutation ,useDeleteNoteMutation, useUpdateNoteMutation} = noteApi;

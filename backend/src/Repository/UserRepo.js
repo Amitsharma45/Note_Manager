@@ -4,22 +4,26 @@ const createNote = (req) => {
     return new Promise((resolve, reject) => {
         NoteModule.find({ _id: req.body._id }).then((data) => {
             if (data.length !== 0) {
-                NoteModule.findOneAndUpdate({ _id: req.body._id }, { $push: { notes: { _id: uuidv4(), tittle: req.body.tittle, notebody: req.body.notebody } } }).then((data) => {
-                    if (data) {
-                        resolve('Data Push Success');
-                    } else {
-                        reject('Something went wrong')
-                    }
-                }).catch((err) => {
-                    reject(err)
-                })
+                NoteModule.findOneAndUpdate({ _id: req.body._id },
+                    { $push: { notes: { _id: uuidv4(), tittle: req.body.tittle, notebody: req.body.notebody, isFavorite: false, isArchive: false } } })
+                    .then((data) => {
+                        if (data) {
+                            resolve('Data Push Success');
+                        } else {
+                            reject('Something went wrong')
+                        }
+                    }).catch((err) => {
+                        reject(err)
+                    })
             } else {
                 let newNote = new NoteModule({
                     _id: req.body._id,
                     notes: [{
                         _id: uuidv4(),
                         tittle: req.body.tittle,
-                        notebody: req.body.notebody
+                        notebody: req.body.notebody,
+                        isFavorite: false,
+                        isArchive: false
                     }]
                 })
                 newNote.save().
@@ -49,19 +53,44 @@ const getNotes = (req) => {
     })
 }
 
-const updateNote =(req) =>{
+const updateNote = (req) => {
 
-    return new Promise((resole,reject)=>{
-        NoteModule.findOneAndUpdate({_id :req.body._id},{ $set: { "notes.$[elem].tittle": req.body.tittle,"notes.$[elem].notebody": req.body.notebody } },
-        { arrayFilters: [{ "elem._id": req.body.noteid }] })
-        .then((data)=>{
-            resole("Update Success");
-        })
-        .catch((err)=>{
-            reject(err)
-        })
+    return new Promise((resole, reject) => {
+        NoteModule.findOneAndUpdate({ _id: req.body._id }, { $set: { "notes.$[elem].tittle": req.body.tittle, "notes.$[elem].notebody": req.body.notebody } },
+            { arrayFilters: [{ "elem._id": req.body.noteid }] })
+            .then((data) => {
+                resole("Update Success");
+            })
+            .catch((err) => {
+                reject(err)
+            })
     });
 
+}
+
+const favroiteNote = (req) => {
+    return new Promise((resole, reject) => {
+        NoteModule.findOneAndUpdate({ _id: req.body._id }, { $set: { "notes.$[elem].isFavorite": req.body.isFavorite } },
+            { arrayFilters: [{ "elem._id": req.body.noteid }] })
+            .then((data) => {
+                resole('Update Favorite success')
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
+const archiveNote = (req) => {
+    return new Promise((resole, reject) => {
+        NoteModule.findOneAndUpdate({ _id: req.body._id }, { $set: { "notes.$[elem].isArchive": req.body.isArchive } },
+            { arrayFilters: [{ "elem._id": req.body.noteid }] })
+            .then((data) => {
+                resole('Update Archive success')
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
 }
 
 const deleteNote = (req) => {
@@ -77,6 +106,5 @@ const deleteNote = (req) => {
     })
 }
 
+module.exports = { createNote, favroiteNote,archiveNote, getNotes, deleteNote, updateNote };
 
-
-module.exports = { createNote, getNotes, deleteNote , updateNote};

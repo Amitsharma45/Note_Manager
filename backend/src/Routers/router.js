@@ -11,6 +11,9 @@ router.post('/createNote',userControler.createNote);
 
 // Update note by note id
 router.put('/updateNote',userControler.updateNote)
+
+router.put('/favoriteNote',userControler.favroiteNote)
+router.put('/archiveNote',userControler.archiveNote)
 // delete note by note _id
 router.delete('/deleteNote',userControler.deleteNote)
 

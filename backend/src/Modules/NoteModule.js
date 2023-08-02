@@ -11,7 +11,9 @@ const NoteSchema = mongoose.Schema({
 
                 _id: String,
                 tittle: String,
-                notebody: String
+                notebody: String,
+                isFavorite: Boolean,
+                isArchive:Boolean
             }
             , { timestamps: true }
             )

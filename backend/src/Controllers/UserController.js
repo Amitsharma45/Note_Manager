@@ -27,12 +27,33 @@ const updateNote = (req, res) => {
     repo.updateNote(req)
         .then((data) => {
             res.status(200).send({
-                status:200,
-                message:data
+                status: 200,
+                message: data
             });
         })
         .catch((err) => {
             res.status(404).send('err')
+        })
+}
+const favroiteNote = (req, res) => {
+    console.log(req.body)
+    repo.favroiteNote(req)
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+}
+
+const archiveNote = (req, res) => {
+    console.log(req.body)
+    repo.archiveNote(req)
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.send(err)
         })
 }
 
@@ -47,4 +68,4 @@ const deleteNote = (req, res) => {
             res.status(404).send("Error")
         })
 }
-module.exports = { createNote, getNotes, deleteNote ,updateNote }
+module.exports = { createNote, favroiteNote, archiveNote ,getNotes, deleteNote, updateNote };
