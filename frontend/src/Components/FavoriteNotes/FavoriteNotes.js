@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { useGetNotesQuery } from '../../Feature/ApiSlice';
@@ -7,20 +7,21 @@ import { DotWave } from '@uiball/loaders'
 export default function FavoriteNote() {
 
     const { data, isLoading } = useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178')
+
     function isFavorite(item) {
         if (item.isFavorite) {
             return <Card item={item} key={item._id} />;
         }
-        return
+        return;
     }
     return (
         <>
 
-            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 '>
+            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 flex-[100%]'>
                 <div className='  dark:bg-slate-700 bg-secondarylight rounded-xl  '>
                     <div className='flex justify-between dark:text-white text-2xl mx-5 pt-5'>
                         <span className='font-semibold text-3xl underline '>Favorite Notes :-</span>
-                        <FontAwesomeIcon icon={faList} />
+                        {/* <FontAwesomeIcon icon={faList} /> */}
                     </div>
                     <div className='flex flex-wrap lg:justify-around items-center justify-center min-h-[300px] m-5 mt-2'>
                         {isLoading ? (
@@ -34,7 +35,7 @@ export default function FavoriteNote() {
                         ) : (
                             <>
                                 {
-                                    data?.notes !== undefined && data?.notes?.length !== 0 ? (
+                                    data?.notes !== undefined && data?.notes?.length !== 0  ? (
                                         <>
                                             {
                                                 data !== undefined && data?.notes?.map((item) =>
@@ -43,7 +44,7 @@ export default function FavoriteNote() {
                                             }
                                         </>
                                     ) : (
-                                        <h1 className='dark:text-white text-4xl mb-11'>There is not any Note in Favorite!</h1>
+                                        <h1 className='text-center dark:text-white md:text-4xl text-2xl md:mt-11 mt-2'>There is not any Note in Favorite!</h1>
                                     )
                                 }
                             </>

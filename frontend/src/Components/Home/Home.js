@@ -18,13 +18,11 @@ export default function Home() {
         }
         return
     }
-    console.log("data", data?.notes === undefined)
-    console.log(data)
 
     return (
         <>
 
-            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 '>
+            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 flex-[100%] '>
                 <div className='flex justify-center'>
                     <button className='bg-secondarylight dark:bg-slate-700 hover:opacity-60 dark:hover:bg-slate-400 dark:text-white  text-xl w-full py-4 rounded-lg text-start pl-9  ' onClick={() => {
                         dispatch(addToggles())
@@ -41,10 +39,10 @@ export default function Home() {
                             )
                     }
                 </div>
-                <div className=' mt-8 dark:bg-slate-700 bg-secondarylight rounded-xl  '>
-                    <div className='flex justify-between dark:text-white text-2xl mx-5 pt-5'>
+                <div className=' mt-8 dark:bg-slate-700 bg-secondarylight rounded-xl  min-h-[200px] '>
+                    <div className='flex justify-between dark:text-white text-2xl mx-5 pt-5 w-full'>
                         <span className='font-semibold text-3xl underline '>Your Notes :-</span>
-                        <FontAwesomeIcon icon={faList} />
+                        {/* <FontAwesomeIcon icon={faList} /> */}
                     </div>
                     {
                         isLoading ? (
@@ -67,7 +65,7 @@ export default function Home() {
                                             }
                                         </>
                                     ) : (
-                                        <h1 className='dark:text-white text-4xl py-[100px]'>Please Add some Notes!!</h1>
+                                        <h1 className='dark:text-white text-2xl md:text-4xl py-[100px]'>Please Add some Notes!!</h1>
                                     )
                                 }
                             </div>

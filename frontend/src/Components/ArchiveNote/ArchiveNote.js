@@ -15,13 +15,13 @@ function ArchiveNote() {
     }
     return (
         <>
-            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 '>
+            <div className='lg:flex-[80%] md:flex-[70%] md:ml-12 flex-[100%]'>
                 <div className='  dark:bg-slate-700 bg-secondarylight rounded-xl  '>
                     <div className='flex justify-between dark:text-white text-2xl mx-5 pt-5'>
                         <span className='font-semibold text-3xl underline '>Archive Notes :-</span>
-                        <FontAwesomeIcon icon={faList} />
+                        {/* <FontAwesomeIcon icon={faList} /> */}
                     </div>
-                    <div className='flex flex-wrap lg:justify-around items-center justify-center min-h-[300px] m-5 mt-2'>
+                    <div className='flex flex-wrap lg:justify-around items-center justify-center min-h-[300px] md:m-5 mx-1 mt-2'>
                         {isLoading ? (
                             <div className='text-3xl mt-5 flex justify-center h-[200px] pt-10'>
                                 <DotWave
@@ -42,7 +42,7 @@ function ArchiveNote() {
                                             }
                                         </>
                                     ) : (
-                                        <h1 className='dark:text-white text-4xl mt-11'>There is not any Note in Archive!</h1>
+                                        <div className='text-center dark:text-white md:text-4xl text-2xl md:mt-11 mt-2'>There is not any Note in Archive!</div>
                                     )
                                 }
                             </>

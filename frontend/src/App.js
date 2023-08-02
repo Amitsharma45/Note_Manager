@@ -23,7 +23,7 @@ function App() {
   }, [])
   return (
     <div className={`${darkMode ? 'dark' : ''}  `} >
-      <div className='relative h-min-screen bg-[#f1f4fb] dark:bg-slate-800'>
+      <div className='relative min-h-screen bg-[#f1f4fb] dark:bg-slate-800'>
         {
           loading === true ? (
             <Loader />

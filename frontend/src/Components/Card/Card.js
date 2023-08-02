@@ -19,7 +19,7 @@ function Card(props) {
         }).then((data) => {
             toast.success('Note Delete Success', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -40,7 +40,7 @@ function Card(props) {
         }).then((data)=>{
             toast.success('Update Note Favorite', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -59,7 +59,7 @@ function Card(props) {
         }).then((data)=>{
             toast.success('Update Note Archive', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
