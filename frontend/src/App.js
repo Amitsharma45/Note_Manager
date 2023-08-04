@@ -9,6 +9,8 @@ import { ToastContainer } from 'react-toastify'
 import SideBar from './Components/SideBar/SideBar';
 import FavoriteNote from './Components/FavoriteNotes/FavoriteNotes';
 import ArchiveNote from './Components/ArchiveNote/ArchiveNote';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 function App() {
   const [loading, setloading] = useState(true);
@@ -31,17 +33,14 @@ function App() {
             <>
               <Appbar toggleMode={toggleMode} />
               <ToastContainer />
-              <div className='flex  h-min-[500px] w-[90%] mx-auto mt-8'>
-                <div className='z-10 lg:flex-[20%]  md:flex-[30%]  md:relative  absolute md:block   md:h-auto h-[400px] right-0 top-0'>
-                  <SideBar />
-                </div>
-                <Routes  >
-                  <Route path="/" element={<Navigate to="/home" />} />
-                  <Route path='/home' element={<Home />} />
-                  <Route path='/favoriteNote' element={<FavoriteNote />} />
-                  <Route path='/archiveeNote' element={<ArchiveNote />} />
-                </Routes>
-              </div>
+              <Routes  >
+                <Route path='/login' element={<Login />} />
+                <Route path='/Register' element={<Register />} />
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/favoriteNote' element={<FavoriteNote />} />
+                <Route path='/archiveeNote' element={<ArchiveNote />} />
+              </Routes>
             </>
           )
         }

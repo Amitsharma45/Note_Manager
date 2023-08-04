@@ -1,30 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const UserModle = require('../Modules/UserModule');
-const userControler = require('../Controllers/UserController');
+const NoteControler = require('../Controllers/NoteController');
+const UserContoler= require('../Controllers/UserController')
 {
     // Create user;
+    // get user profile
     // login user;
     // log out user;
     // forgot password
     // changer password
 }
+router.post('/createUser',UserContoler.createUser);
 
 // get all notes of user by _id
 router.get('/',(req,res)=>{
     res.send('running')
 })
-router.get('/getNotes',userControler.getNotes)
+router.get('/getNotes',NoteControler.getNotes)
 
 //  add note in  database
-router.post('/createNote',userControler.createNote);
+router.post('/createNote',NoteControler.createNote);
 
 // Update note by note id
-router.put('/updateNote',userControler.updateNote)
+router.put('/updateNote',NoteControler.updateNote)
 
-router.put('/favoriteNote',userControler.favroiteNote)
-router.put('/archiveNote',userControler.archiveNote)
+router.put('/favoriteNote',NoteControler.favroiteNote)
+router.put('/archiveNote',NoteControler.archiveNote)
 // delete note by note _id
-router.delete('/deleteNote',userControler.deleteNote)
+router.delete('/deleteNote',NoteControler.deleteNote)
 
 module.exports = { router };    
