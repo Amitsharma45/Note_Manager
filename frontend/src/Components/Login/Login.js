@@ -1,15 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react'
+import React ,{useState} from 'react'
 import Img from './login.png'
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye ,faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import { Formik, Form } from 'formik';
 function Login() {
     const SignupSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email').required('Required'),
         password: Yup.string().min(6, 'password length should greater then 6').required('Required'),
     });
+    const [showpassword,setshowpassword] = useState(false);
+    
+    
     return (
         <div className='flex justify-center items-center '>
             <div className='bg-black h-[480px] md:w-[780px]   flw bg-opacity-10 flex  md:mt-8 mt-[100px] rounded-2xl pt-5 shadow-lg '>
@@ -42,8 +47,11 @@ function Login() {
                                 </div>
                                 <div className='my-2'>
                                     <div className='my-2 md:text-xl'>Password:-</div>
-                                    <input name="password" onChange={handleChange}
-                                        onBlur={handleBlur} id="password" className='h-[40px] w-[300px] pl-2 bg-gray-600 bg-opacity-40 placeholder:text-black dark:bg-black dark:bg-opacity-40 rounded-md dark:placeholder:text-white' placeholder='password' />
+                                    <div className='relative  h-[40px]'>
+                                        <input name='password' onChange={handleChange} type={`${showpassword ? 'text' : "password"}`}
+                                            onBlur={handleBlur} className=' h-[40px] w-[300px]  pl-2 bg-gray-600 bg-opacity-40 placeholder:text-black dark:bg-black dark:bg-opacity-40 rounded-md dark:placeholder:text-white' placeholder='Password' />
+                                        <FontAwesomeIcon icon={showpassword ? faEye : faEyeSlash} className='cursor-pointer absolute  mt-[2px] p-[8px] text-xl right-[2px] rounded-md  z-10 hover:bg-black hover:bg-opacity-40' onClick={() => setshowpassword(!showpassword)} />
+                                    </div>
                                     {errors.password && touched.password ? (
                                         <div className=' text-red-600 font-semibold'>{errors.password}</div>
                                     ) : null}
