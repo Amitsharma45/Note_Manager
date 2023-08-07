@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import { useAddUserMutation } from '../../Feature/ApiSlice';
 function Register() {
 
     const registerschema = Yup.object().shape({
@@ -26,6 +27,8 @@ function Register() {
     const [showpassword, setshowpassword] = useState(false);
     const [confirmpassword, setconfirmpassword] = useState(false);
 
+    const [addUser] = useAddUserMutation();
+
     return (
         <div className='flex justify-center items-center '>
             <div className='bg-black h-min-[480px] md:w-[800px] sm:w-[730px]   flw bg-opacity-10 flex  md:mt-8 mt-[100px] rounded-2xl pt-5 shadow-lg '>
@@ -41,7 +44,37 @@ function Register() {
                         }}
                         validationSchema={registerschema}
                         onSubmit={(values) => {
-                            console.log(values)
+                            addUser(values)
+                            .then((data)=>{
+                                console.log(data)
+                                if(data?.data?.user){
+                                    toast.error('User with this email id already found', {
+                                        position: "top-right",
+                                        autoClose: 1000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                    });
+                                }else{
+                                    toast.success('Account created Success', {
+                                        position: "top-right",
+                                        autoClose: 1000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                    });
+                                }
+                                console.log(data)
+                            })
+                            .catch((err)=>{
+                                console.log(err)
+                            })
                         }}
                     >
                         {({ errors, touched, handleChange, handleBlur, values }) => (

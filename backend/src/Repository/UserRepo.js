@@ -1,25 +1,30 @@
 const UserModule = require("../Modules/UserModule")
+const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const createUser = (req) => {
     return new Promise((resolve, reject) => {
-        UserModule.findOne({ emailid: req.body.emailid })
+        UserModule.findOne({ email: req.body.email })
             .then((data) => {
-                console.log(data)
                 if (data) {
                     reject({
-                        message:"User already present"
+                        message:"User already present",
+                        user: true
                     })
                 }else{
                     let newUser= new UserModule({
                         _id: uuidv4(),
-                        firstName: req.body.firstName,
-                        lastName:req.body.lastName,
-                        emailid: req.body.emailid,
-                        password: req.body.password
+                        fullname: req.body.fullname,
+                        email: req.body.email,
+                        password: bcrypt.hashSync(req.body.password,10,function(err, result){
+                            return result
+                        })
                     })
                     newUser.save()
                     .then((data)=>{
-                        resolve('User resgister success')
+                        resolve({
+                            message:'User resgister success',
+                            user:false
+                        })
                     })
                 }
 
