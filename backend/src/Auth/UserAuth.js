@@ -4,14 +4,16 @@ const passportLocal = require('passport-local');
 const UserModule = require('../Modules/UserModule');
 const bcrypt = require('bcrypt');
 const generateToken = (userid) => {
-    var token = jwt.sign(userid, privateKey);
+    var token = jwt.sign(userid, privateKey, {
+        expiresIn: "10d" 
+    });
     return token;
 }
 
 const verifyToken = (token) => {
     var result = jwt.verify(token, privateKey, (err, decode) => decode !== undefined ? decode : err);
     if (result instanceof Error) {
-        return "Something went wrong"
+        return {message:"Token expired", expire: true}
     }
     return result;
 }
@@ -27,7 +29,7 @@ const loginAuth = () => {
                 } else {
                     return done(null, false, { status: 409, message: "Invalid password" })
                 }
-            }).catch((err)=>{
+            }).catch((err) => {
                 return done(err)
             })
 

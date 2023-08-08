@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const noteApi = createApi({
     reducerPath: "noteApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://notemanagerbackend.vercel.app/api/v1" }),
     tagTypes: ['Notes'],
     endpoints: (builder) => ({
         getNotes: builder.query({
@@ -64,7 +64,14 @@ export const noteApi = createApi({
             }),
             invalidatesTags: ['Notes'],
         }),
+        login:builder.mutation({
+            query:(body) =>({
+                url:'/login',
+                method:"POST",
+                body:body
+            })
+        })
     })
 })
 
-export const { useGetNotesQuery, useAddUserMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation, useAddNoteMutation, useDeleteNoteMutation, useUpdateNoteMutation } = noteApi;
+export const { useGetNotesQuery, useLoginMutation, useAddUserMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation, useAddNoteMutation, useDeleteNoteMutation, useUpdateNoteMutation } = noteApi;

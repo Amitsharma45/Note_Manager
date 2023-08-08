@@ -14,7 +14,9 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 // connecting mongoose database
-const URI = 'mongodb://localhost:27017/TaskManager';
+
+// const URI = 'mongodb://localhost:27017/TaskManager';
+const URI= "mongodb+srv://mongoadmin:amit1234@cluster0.ny6ohvf.mongodb.net/?retryWrites=true&w=majority";
 const store = MongoDBStore({
     uri: URI,
     collection: 'notesession'
@@ -26,7 +28,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 6000000,
+        maxAge: 60000*2,
         sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
         secure: process.env.NODE_ENV === "production"// must be true if sameSite='none'
     },
@@ -34,7 +36,6 @@ app.use(session({
 }));
 
 
-// mongoose.connect('mongodb+srv://mongoadmin:amit1234@cluster0.ny6ohvf.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connect(URI);
 mongoose.connection.once('open', () => {
     console.log('Mongodb connected')

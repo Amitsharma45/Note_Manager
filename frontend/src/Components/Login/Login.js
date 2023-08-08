@@ -7,13 +7,14 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye ,faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import { Formik, Form } from 'formik';
+import { useLoginMutation } from '../../Feature/ApiSlice';
 function Login() {
     const SignupSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email').required('Required'),
         password: Yup.string().min(6, 'password length should greater then 6').required('Required'),
     });
     const [showpassword,setshowpassword] = useState(false);
-    
+    const [userlogin] = useLoginMutation();
     
     return (
         <div className='flex justify-center items-center '>
@@ -31,6 +32,13 @@ function Login() {
                         validationSchema={SignupSchema}
                         onSubmit={(values) => {
                             console.log(values);
+                            userlogin(values)
+                            .then((data)=>{
+                                console.log(data)
+                                console.log(document.cookie)
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
                         }}
 
                     >
