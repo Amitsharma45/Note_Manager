@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import Img from './login.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye ,faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Formik, Form } from 'formik';
 import { useLoginMutation } from '../../Feature/ApiSlice';
 function Login() {
@@ -13,9 +13,10 @@ function Login() {
         email: Yup.string().email('Invalid email').required('Required'),
         password: Yup.string().min(6, 'password length should greater then 6').required('Required'),
     });
-    const [showpassword,setshowpassword] = useState(false);
+    const [showpassword, setshowpassword] = useState(false);
     const [userlogin] = useLoginMutation();
-    
+    const navigate= useNavigate();
+
     return (
         <div className='flex justify-center items-center '>
             <div className='bg-black h-[480px] md:w-[780px]   flw bg-opacity-10 flex  md:mt-8 mt-[100px] rounded-2xl pt-5 shadow-lg '>
@@ -32,13 +33,41 @@ function Login() {
                         validationSchema={SignupSchema}
                         onSubmit={(values) => {
                             console.log(values);
-                            userlogin(values)
-                            .then((data)=>{
-                                console.log(data)
-                                console.log(document.cookie)
-                            }).catch((err)=>{
-                                console.log(err)
-                            })
+                            try {
+                                userlogin(values)
+                                    .then((data) => {
+                                        console.log(data)
+                                        if(data?.data !== undefined){
+                                            console.log("success",data.data.token);
+                                            localStorage.setItem('JWT',data.data.token)
+                                            toast.success('Login Success', {
+                                                position: "top-right",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "light",
+                                            });
+                                            navigate('/home')
+                                        }else{
+                                            console.log('error');
+                                            toast.error('Please Check your email id and Password', {
+                                                position: "top-right",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "light",
+                                            });
+                                        }
+                                    })
+                            } catch {
+                                console.log('fuck')
+                            }
                         }}
 
                     >

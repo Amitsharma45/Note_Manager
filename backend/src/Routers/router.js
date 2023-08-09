@@ -17,12 +17,8 @@ const passportLocal = require('passport-local');
 }
 router.post('/createUser',UserContoler.createUser);
 
-router.post('/login',passport.authenticate('local'),(req,res)=>{
-    const token = generateToken(req.session.passport)
-    // console.log(req.session.passport)
-    res.cookie("jwt", token, { secure: true,httpOnly: false, maxAge: 6000000 });
-    res.status(200).send({message:token});
-})
+router.post('/login',passport.authenticate('local') ,UserContoler.login)
+
 router.get('/logout',(req,res)=>{
     res.send(verifyToken(req.body.token))
 })

@@ -19,11 +19,12 @@ const verifyToken = (token) => {
 }
 
 const loginAuth = () => {
-    return new passportLocal({ usernameField: 'email', passwordField: "password" }, function (username, password, done) {
-        UserModule.findOne({ email: username })
+    return new passportLocal({ usernameField: 'email', passwordField: "password" }, async function (username, password, done) {
+        await UserModule.findOne({ email: username })
             .then((user) => {
                 if (!user) {
-                    return done(null, false, { status: 409, message: "Invalid email id" })
+                    console.log('err')
+                    return done(null , false,{ status: 409, message: "Invalid email id" })
                 } else if (bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {

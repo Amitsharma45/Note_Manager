@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { DotWave } from '@uiball/loaders'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,11 @@ export default function Home() {
         }
         return
     }
+    useEffect(() => {
+      const token= localStorage.getItem('JWT');
+      console.log('token',token)
+    }, [])
+    
 
     return (
         <>
