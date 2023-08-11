@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import Home from './Components/Home/Home';
 import './App.css'
 import { ToastContainer } from 'react-toastify'
-import SideBar from './Components/SideBar/SideBar';
 import FavoriteNote from './Components/FavoriteNotes/FavoriteNotes';
 import ArchiveNote from './Components/ArchiveNote/ArchiveNote';
 import Login from './Components/Login/Login';
