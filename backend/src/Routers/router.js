@@ -6,40 +6,24 @@ const bcrypt = require('bcrypt');
 const { generateToken, verifyToken } = require('../Auth/UserAuth');
 const passport = require('passport');
 const passportLocal = require('passport-local');
+const {verifyUser} = require('../Middleware/Middleware')
 
-{
-    // Create user;
-    // get user profile
-    // login user;
-    // log out user;
-    // forgot password
-    // changer password
-}
+// CRUD operaton in User 
 router.post('/createUser',UserContoler.createUser);
-
 router.post('/login',passport.authenticate('local') ,UserContoler.login)
-
-router.get('/logout',(req,res)=>{
-    res.send(verifyToken(req.body.token))
+router.get('/isAuth',(req,res)=>{
+    console.log(req.headers.authorization)
+    res.status(200).send(verifyToken(req.headers.authorization))
 })
-router.get('/profile')
+router.get('/profile', verifyUser,UserContoler.getProfile)
 
 
-// get all notes of user by _id
-router.get('/password',(req,res)=>{
-    res.send(bcrypt.compareSync(req.body.pass, '$2b$10$yS7WLZA6k94OMtzJ92.Xwu3xxYSHQ1/ykfxAXdkvZ/kup2qiBRshO'))
-})
+// CRUD operation in Notes
 router.get('/getNotes',NoteControler.getNotes)
-
-//  add note in  database
 router.post('/createNote',NoteControler.createNote);
-
-// Update note by note id
 router.put('/updateNote',NoteControler.updateNote)
-
 router.put('/favoriteNote',NoteControler.favroiteNote)
 router.put('/archiveNote',NoteControler.archiveNote)
-// delete note by note _id
 router.delete('/deleteNote',NoteControler.deleteNote)
 
 module.exports = { router };    

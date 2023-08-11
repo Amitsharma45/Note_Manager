@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react'
 import Img from './login.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,7 +26,7 @@ function Register() {
     });
     const [showpassword, setshowpassword] = useState(false);
     const [confirmpassword, setconfirmpassword] = useState(false);
-
+    const nav=  useNavigate();
     const [addUser] = useAddUserMutation();
 
     return (
@@ -45,36 +45,38 @@ function Register() {
                         validationSchema={registerschema}
                         onSubmit={(values) => {
                             addUser(values)
-                            .then((data)=>{
-                                console.log(data)
-                                if(data?.data?.user){
-                                    toast.error('User with this email id already found', {
-                                        position: "top-right",
-                                        autoClose: 1000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                        theme: "light",
-                                    });
-                                }else{
-                                    toast.success('Account created Success', {
-                                        position: "top-right",
-                                        autoClose: 1000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                        theme: "light",
-                                    });
-                                }
-                                console.log(data)
-                            })
-                            .catch((err)=>{
-                                console.log(err)
-                            })
+                                .then((data) => {
+                                    console.log(data)
+                                    if (data?.data?.user) {
+                                        toast.error('User with this email id already found', {
+                                            position: "top-right",
+                                            autoClose: 1000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                            theme: "light",
+                                        });
+                                    } else {
+                                        localStorage.setItem('JWT', data.data.token);
+                                        toast.success('Account created Success', {
+                                            position: "top-right",
+                                            autoClose: 1000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                            theme: "light",
+                                        });
+                                        nav('/home')
+                                    }
+                                    console.log(data)
+                                })
+                                .catch((err) => {
+                                    console.log(err)
+                                })
                         }}
                     >
                         {({ errors, touched, handleChange, handleBlur, values }) => (

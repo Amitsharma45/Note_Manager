@@ -1,6 +1,8 @@
 const UserModule = require("../Modules/UserModule")
 const bcrypt = require('bcrypt');
+const { reject } = require("bcrypt/promises");
 const { v4: uuidv4 } = require('uuid');
+const { generateToken } = require("../Auth/UserAuth");
 const createUser = (req) => {
     return new Promise((resolve, reject) => {
         UserModule.findOne({ email: req.body.email })
@@ -21,9 +23,11 @@ const createUser = (req) => {
                     })
                     newUser.save()
                     .then((data)=>{
+                        const token = generateToken({user:data._id})
                         resolve({
                             message:'User resgister success',
-                            user:false
+                            user:false,
+                            token:token
                         })
                     })
                 }
@@ -33,4 +37,11 @@ const createUser = (req) => {
 
 }
 
-module.exports = { createUser }
+const getProfile= (req)=>{
+    return new Promise((resolve,reject)=>{
+        UserModule.findOne({_id:req.user}).then((data)=>{
+            resolve(data)
+        })
+    })
+}
+module.exports = { createUser ,getProfile }

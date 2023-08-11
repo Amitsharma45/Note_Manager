@@ -1,6 +1,7 @@
 import React from 'react'
 import { useUpdateNoteMutation } from '../../Feature/ApiSlice'
 import { toast } from 'react-toastify';
+import { useDispatch,useSelector } from 'react-redux';
 
 function EditNote(props) {
   const { editclose, item } = props;
@@ -9,9 +10,11 @@ function EditNote(props) {
     notebody: item.notebody
   })
   const [updateNote] = useUpdateNoteMutation();
+  const { userId } = useSelector(state => state.ToggleSlice)
+  const dispatch = useDispatch();
   const updateEdit = async () => {
     const data = await updateNote({
-      _id: "bc8aa2-69-4deb-a9b2-d0896e489178",
+      _id: userId,
       noteid: item._id,
       ...newnote
 
@@ -27,7 +30,7 @@ function EditNote(props) {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
+    });
   }
   return (
     <div className='absolute h-full w-full bg-black bg-opacity-50 top-0 left-0 z-10  text-white  flex justify-center md:pt-[130px] pt-[150px]'>

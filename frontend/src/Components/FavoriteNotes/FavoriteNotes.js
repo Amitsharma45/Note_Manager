@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
-import { useGetNotesQuery } from '../../Feature/ApiSlice';
 import Card from '../Card/Card';
 import { DotWave } from '@uiball/loaders'
 import SideBar from '../SideBar/SideBar';
-export default function FavoriteNote() {
-
-    const { data, isLoading } = useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178')
-
+import HOC from '../HOC/HOC';
+function FavoriteNote(props) {
+    const { data, isLoading } = props;
     const [favdata, setfavdata] = useState([]);
     useEffect(() => {
-        const temp = data?.notes.filter((i) => i.isFavorite === true)
+        const temp = data?.notes?.filter((i) => i.isFavorite === true)
         setfavdata(temp)
     }, [data])
-    console.log(favdata)
 
-    function isFavorite(item) {
-        if (item.isFavorite) {
-            return <Card item={item} key={item._id} />;
-        }
-        return;
-    }
     return (
         <>
             <div className='flex  h-min-[500px] w-[90%] mx-auto mt-8'>
@@ -51,8 +40,8 @@ export default function FavoriteNote() {
                                             <>
                                                 {
                                                     favdata !== undefined && favdata?.map((item) =>
-                                                        isFavorite(item)
-                                                    )
+                                                        <Card item={item} key={item._id} />
+                                                )
                                                 }
                                             </>
                                         ) : (
@@ -69,3 +58,4 @@ export default function FavoriteNote() {
         </>
     )
 }
+export default HOC(FavoriteNote)

@@ -5,17 +5,19 @@ const UserModule = require('../Modules/UserModule');
 const bcrypt = require('bcrypt');
 const generateToken = (userid) => {
     var token = jwt.sign(userid, privateKey, {
-        expiresIn: "10d" 
+        expiresIn: "11m"
     });
+    console.log(token)
     return token;
 }
 
 const verifyToken = (token) => {
     var result = jwt.verify(token, privateKey, (err, decode) => decode !== undefined ? decode : err);
     if (result instanceof Error) {
-        return {message:"Token expired", expire: true}
+        return false
+    } else {
+        return true
     }
-    return result;
 }
 
 const loginAuth = () => {
@@ -24,7 +26,7 @@ const loginAuth = () => {
             .then((user) => {
                 if (!user) {
                     console.log('err')
-                    return done(null , false,{ status: 409, message: "Invalid email id" })
+                    return done(null, false, { status: 409, message: "Invalid email id" })
                 } else if (bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {

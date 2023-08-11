@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useAddNoteMutation } from '../../Feature/ApiSlice';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { addToggles } from '../../Feature/toggleSlice';
 
-
 function AddNote() {
+    const { userId} = useSelector(state => state.ToggleSlice)
     const dispatch = useDispatch();
     const [cretaNote] = useAddNoteMutation()
     const [newnote, setnote] = useState({
@@ -13,7 +13,7 @@ function AddNote() {
         notebody: ''
     })
     const SaveNote = () => {
-        cretaNote({ ...newnote, _id: 'bc8aa2-69-4deb-a9b2-d0896e489178' })
+        cretaNote({ ...newnote, _id: userId })
             .then((resp) => {
                 toast.success('Add Note Success', {
                     position: "top-right",

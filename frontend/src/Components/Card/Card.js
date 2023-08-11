@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays,faBoxArchive, faEllipsisVertical, faPenToSquare, faTrashCan, faHeart, faTemperatureHalf } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faBoxArchive, faEllipsisVertical, faPenToSquare, faTrashCan, faHeart, faTemperatureHalf } from '@fortawesome/free-solid-svg-icons';
 import { useDeleteNoteMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation } from '../../Feature/ApiSlice';
 import EditNote from '../EditNote/EditNote';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Card(props) {
+    const { userId } = useSelector(state => state.ToggleSlice)
+    const dispatch = useDispatch();
     const { item } = props;
     const [editToggle, seteditToggle] = useState(false)
     const [deleteNote] = useDeleteNoteMutation();
@@ -14,7 +17,7 @@ function Card(props) {
     const [updateArchive] = useIsArchiveNoteMutation();
     const DeleteNote = (noteid) => {
         deleteNote({
-            "_id": "bc8aa2-69-4deb-a9b2-d0896e489178",
+            "_id": userId,
             "noteid": noteid
         }).then((data) => {
             toast.success('Note Delete Success', {
@@ -34,10 +37,10 @@ function Card(props) {
     }
     const updateisFavorite = (item) => {
         updateFavorite({
-            _id: "bc8aa2-69-4deb-a9b2-d0896e489178",
+            _id: userId,
             noteid: item._id,
             isFavorite: !item.isFavorite
-        }).then((data)=>{
+        }).then((data) => {
             toast.success('Update Note Favorite', {
                 position: "top-right",
                 autoClose: 1000,
@@ -49,14 +52,14 @@ function Card(props) {
                 theme: "light",
             });
         })
-        
+
     }
     const updateisArchive = (item) => {
         updateArchive({
-            _id: "bc8aa2-69-4deb-a9b2-d0896e489178",
+            _id: userId,
             noteid: item._id,
             isArchive: !item.isArchive
-        }).then((data)=>{
+        }).then((data) => {
             toast.success('Update Note Archive', {
                 position: "top-right",
                 autoClose: 1000,
@@ -68,7 +71,7 @@ function Card(props) {
                 theme: "light",
             });
         })
-        
+
     }
 
     return (

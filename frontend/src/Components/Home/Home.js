@@ -1,30 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { DotWave } from '@uiball/loaders'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import {  faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import AddNote from '../AddNote/AddNote';
-import { useGetNotesQuery } from '../../Feature/ApiSlice';
 import Card from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToggles } from '../../Feature/toggleSlice';
 import SideBar from '../SideBar/SideBar';
-export default function Home() {
-
+import HOC from '../HOC/HOC';
+function Home(props) {
     const dispatch = useDispatch();
-    const { addNote } = useSelector(state => state.ToggleSlice)
-    const { data, isLoading } = useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178');
+    const {data,isLoading} = props;
     function isArchive(item) {
-        if (!item.isArchive) {
+        if (!item.isArchive ) {
             return <Card item={item} key={item._id} />;
         }
         return
     }
-    useEffect(() => {
-      const token= localStorage.getItem('JWT');
-      console.log('token',token)
-    }, [])
-    
-
+    const { addNote } = useSelector(state => state.ToggleSlice)
     return (
         <>
             <div className='flex  h-min-[500px] w-[90%] mx-auto mt-8'>
@@ -87,3 +80,5 @@ export default function Home() {
         </>
     )
 }
+
+export default  HOC(Home)

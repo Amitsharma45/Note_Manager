@@ -1,19 +1,16 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
-import { useGetNotesQuery } from '../../Feature/ApiSlice';
+import React, { useState, useEffect } from 'react'
 import Card from '../Card/Card';
 import { DotWave } from '@uiball/loaders'
 import SideBar from '../SideBar/SideBar';
+import HOC from '../HOC/HOC';
 
-function ArchiveNote() {
-    const { data, isLoading } = useGetNotesQuery('bc8aa2-69-4deb-a9b2-d0896e489178')
-    function isArchive(item) {
-        if (item.isArchive) {
-            return <Card item={item} key={item._id} />;
-        }
-        return
-    }
+function ArchiveNote(props) {
+    const { data, isLoading } = props;
+    const [arcdata, setarcdata] = useState([]);
+    useEffect(() => {
+        const temp = data?.notes?.filter((i) => i.isArchive === true)
+        setarcdata(temp)
+    }, [data])
     return (
         <>
             <div className='flex  h-min-[500px] w-[90%] mx-auto mt-8'>
@@ -38,11 +35,11 @@ function ArchiveNote() {
                             ) : (
                                 <>
                                     {
-                                        data?.notes !== undefined && data?.notes?.length !== 0 ? (
+                                        arcdata !== undefined && arcdata?.length !== 0 ? (
                                             <>
                                                 {
-                                                    data !== undefined && data?.notes?.map((item) =>
-                                                        isArchive(item)
+                                                    arcdata !== undefined && arcdata?.map((item) =>
+                                                        <Card item={item} key={item._id} />
                                                     )
                                                 }
                                             </>
@@ -61,4 +58,4 @@ function ArchiveNote() {
     )
 }
 
-export default ArchiveNote
+export default HOC(ArchiveNote)

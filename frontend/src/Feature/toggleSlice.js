@@ -13,8 +13,11 @@ const toggleSlice = createSlice({
 		},
 		editToggles: (state) => {
 			state.editNote = !state.editNote
+		},
+		setUSerid: (state,action) =>{
+			state.userId= action.payload
 		}
 	},
 });
-export const { addToggles ,editToggles} = toggleSlice.actions;
+export const { addToggles ,editToggles,setUSerid} = toggleSlice.actions;
 export default toggleSlice.reducer;

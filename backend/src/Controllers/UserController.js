@@ -8,11 +8,17 @@ const createUser = (req, res) => {
             res.send(err)
         })
 }
+const getProfile =(req,res)=>{
+    UserRepo.getProfile(req).then((data)=>{
+        res.status(200).send({data,message:'user profile'})
+    })
+}
 
 
 const login = (req, res) => {
     const token = generateToken(req.session.passport)
-    res.status(200).send({ messaeg:'Login success', token: token });
+    const userid= req.session.passport.user
+    res.status(200).send({ messaeg:'Login success', token: token,userid });
 }
 
-module.exports = { createUser, login }
+module.exports = { createUser, login ,getProfile}
