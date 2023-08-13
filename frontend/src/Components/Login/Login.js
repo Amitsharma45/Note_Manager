@@ -15,7 +15,7 @@ function Login() {
         password: Yup.string().min(6, 'password length should greater then 6').required('Required'),
     });
     const [showpassword, setshowpassword] = useState(false);
-    const [userlogin, { isLoading }] = useLoginMutation();
+    const [userlogin, { isLoading, error }] = useLoginMutation();
     const navigate = useNavigate();
     function demologin() {
         const auth = {
@@ -23,23 +23,23 @@ function Login() {
             password: '123456789'
         }
         userlogin(auth)
-        .then((data)=>{
-            if (data?.data !== undefined) {
-                console.log("success", data.data.token);
-                localStorage.setItem('JWT', data.data.token);
-                toast.success('Demo Login Success', {
-                    position: "top-right",
-                    autoClose: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-                navigate('/home')
-            } 
-        })
+            .then((data) => {
+                if (data?.data !== undefined) {
+                    console.log("success", data.data.token);
+                    localStorage.setItem('JWT', data.data.token);
+                    toast.success('Demo Login Success', {
+                        position: "top-right",
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                    navigate('/home')
+                }
+            })
     }
     return (
         <>
@@ -64,37 +64,36 @@ function Login() {
                             }}
                             validationSchema={SignupSchema}
                             onSubmit={(values) => {
-                                console.log(values);
                                 try {
                                     userlogin(values)
+                                        .unwrap()
                                         .then((data) => {
-                                            if (data?.data !== undefined) {
-                                                console.log("success", data.data.token);
-                                                localStorage.setItem('JWT', data.data.token);
-                                                toast.success('Login Success', {
-                                                    position: "top-right",
-                                                    autoClose: 1000,
-                                                    hideProgressBar: false,
-                                                    closeOnClick: true,
-                                                    pauseOnHover: true,
-                                                    draggable: true,
-                                                    progress: undefined,
-                                                    theme: "light",
-                                                });
-                                                navigate('/home')
-                                            } else {
-                                                console.log('error');
-                                                toast.error('Please Check your email id and Password', {
-                                                    position: "top-right",
-                                                    autoClose: 1000,
-                                                    hideProgressBar: false,
-                                                    closeOnClick: true,
-                                                    pauseOnHover: true,
-                                                    draggable: true,
-                                                    progress: undefined,
-                                                    theme: "light",
-                                                });
-                                            }
+                                            console.log("success", data.data.token);
+                                            localStorage.setItem('JWT', data.data.token);
+                                            toast.success('Login Success', {
+                                                position: "top-right",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "light",
+                                            });
+                                            navigate('/home')
+
+                                        })
+                                        .catch((err) => {
+                                            toast.error('Please Check your email id and Password', {
+                                                position: "top-right",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "light",
+                                            });
                                         })
                                 } catch {
                                     console.log('Errorrrr')
@@ -127,7 +126,7 @@ function Login() {
 
                                     <button type='submit' className='my-2 dark:bg-[#38bdf8] bg-gray-500 text-white w-[300px] rounded-md h-[35px] text-xl' >Login</button>
                                     <div className='text-center my-1'>OR</div>
-                                    <button type='button' className='my-2 dark:bg-[#38bdf8] bg-gray-500 text-white w-[300px] rounded-md h-[35px] text-xl' onClick={()=>demologin()} >Demo Login</button>
+                                    <button type='button' className='my-2 dark:bg-[#38bdf8] bg-gray-500 text-white w-[300px] rounded-md h-[35px] text-xl' onClick={() => demologin()} >Demo Login</button>
                                     <div className=''>
                                         <Link to='/Register' className='inline-block pl-1'>Create Account?</Link>
                                     </div>

@@ -47,7 +47,7 @@ export default function SideBar() {
                 </button>
             </div>
             <div className={`pt-8  ${menu ? 'hidden' : 'block'} h-screen md:block px-2`}>
-                <Link className='w-full  border-b-[2px] border-b-slate-900 flex items-center hover:bg-slate-100 hover:dark:bg-slate-800  text-black   dark:text-white px-2 py-4 ' >
+                <Link to='/profile' className='w-full  border-b-[2px] border-b-slate-900 flex items-center hover:bg-slate-100 hover:dark:bg-slate-800  text-black   dark:text-white px-2 py-4 ' >
                     <div className='justify-center items-center mr-2  flex rounded-full h-10 w-10 bg-gray-200 dark:bg-slate-800'>AS</div>
                     <span className='text-xl'> User Profile</span>
                 </Link>
