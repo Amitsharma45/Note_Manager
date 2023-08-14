@@ -25,7 +25,8 @@ const createNote = (req) => {
                         tittle: req.body.tittle,
                         notebody: req.body.notebody,
                         isFavorite: false,
-                        isArchive: false
+                        isArchive: false,
+                        isTrash: false
                     }]
                 })
                 newNote.save().
@@ -101,6 +102,19 @@ const archiveNote = (req) => {
     })
 }
 
+const trashNote = (req) => {
+    return new Promise((resole, reject) => {
+        NoteModule.findOneAndUpdate({ _id: req.body._id }, { $set: { "notes.$[elem].isTrash": req.body.isTrash } },
+            { arrayFilters: [{ "elem._id": req.body.noteid }] })
+            .then((data) => {   
+                resole('Update Trash success')
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
+
 const deleteNote = (req) => {
     return new Promise((resolve, reject) => {
         NoteModule.findOneAndUpdate({ _id: req.body._id }, { $pull: { notes: { _id: req.body.noteid } } })
@@ -114,5 +128,5 @@ const deleteNote = (req) => {
     })
 }
 
-module.exports = { createNote, favroiteNote,archiveNote, getNotes, deleteNote, updateNote };
+module.exports = { createNote, favroiteNote,archiveNote, trashNote,getNotes, deleteNote, updateNote };
 

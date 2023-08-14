@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNotesMedical,faIdBadge, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
+import { faNotesMedical, faDownLong, faIdBadge, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import HOC from '../HOC/HOC';
@@ -51,12 +51,15 @@ function SideBar(props) {
                 </button>
             </div>
             <div className={`pt-8  ${menu ? 'hidden' : 'block'} h-screen md:block px-2`}>
-                <Link className='w-full  border-b-[2px] border-b-slate-900 flex  hover:bg-slate-100 hover:dark:bg-slate-800  text-black   dark:text-white px-2 py-4  flex-col' >
-                    <div className='flex items-center'>
-                        <div className='justify-center items-center mr-2  flex rounded-full h-10 w-10 bg-gray-200 dark:bg-slate-800'>{data?.data?.fullname[0]}</div>
-                        <span className='text-xl'> {data?.data?.fullname}</span>
+                <Link className='w-full   flex   text-black   dark:text-white px-2 py-4  flex-col' >
+                    <div className='flex items-center border-b-[2px] pb-1 border-b-slate-900'>
+                        <div className='justify-center items-center text-2xl  flex rounded-full h-[45px] w-[55px] bg-gray-200 dark:bg-slate-800'>{data?.data?.fullname[0]}</div>
+                        <div className='w-full flex justify-between items-center  px-1 '>
+                            <span className='text-2xl'> {data?.data?.fullname}</span>
+                            <FontAwesomeIcon icon={faDownLong} className=' text-sm '  />
+                        </div>
                     </div>
-                    <div className='mt-4 text-center'>
+                    <div className='pb-2 hidden mt-4 text-center  border-b-[2px] border-b-slate-900'>
                         <div className='my-2'>
                             Email I'D : {data?.data?.email}
                         </div>
@@ -76,17 +79,14 @@ function SideBar(props) {
                     <FontAwesomeIcon icon={faThumbtack} className='mr-2' />
                     Favorite Notes
                 </Link>
-                {/* <Link className='border-b-[1px] inline-block hover:bg-slate-100 hover:dark:bg-slate-800 dark:text-white w-full  py-4 pl-4' >
-                    <FontAwesomeIcon icon={faShare} className='mr-2' />
-                    Shared Notes
-                </Link> */}
+
                 <Link to='/archiveeNote' className='border-b-[2px] border-b-gray-700 dark:border-b-white inline-block hover:bg-slate-100 hover:dark:bg-slate-800 dark:text-white w-full  py-4 pl-4' >
                     <FontAwesomeIcon icon={faBoxArchive} className='mr-2' />
                     Archive
                 </Link>
-                <Link className='border-b-[2px] border-b-gray-700 dark:border-b-white inline-block hover:bg-slate-100 hover:dark:bg-slate-800 dark:text-white  w-full  py-4 pl-4' >
+                <Link to='/Trash' className='border-b-[2px] border-b-gray-700 dark:border-b-white inline-block hover:bg-slate-100 hover:dark:bg-slate-800 dark:text-white  w-full  py-4 pl-4' >
                     <FontAwesomeIcon icon={faTrashCan} className='mr-2' />
-                    Bin
+                    Trash
                 </Link>
                 <Link to='/Contact' className='w-full border-b-gray-700 dark:border-b-white inline-block border-b-[2px] hover:bg-slate-100 hover:dark:bg-slate-800  dark:text-white   py-4 pl-4' >
                     <FontAwesomeIcon icon={faIdBadge} className='mr-2' />

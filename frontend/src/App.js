@@ -11,6 +11,7 @@ import ArchiveNote from './Components/ArchiveNote/ArchiveNote';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Contact from './Components/Contact/Contact';
+import Trash from './Components/Trash/Trash';
 
 function App() {
   const [loading, setloading] = useState(true);
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/Contact' element={<Contact />} />
+                <Route path='/Trash' element={<Trash />} />
                 <Route path='/favoriteNote' element={<FavoriteNote />} />
                 <Route path='/archiveeNote' element={<ArchiveNote />} />
               </Routes>

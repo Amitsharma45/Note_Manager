@@ -23,7 +23,8 @@ router.get('/getNotes',NoteControler.getNotes)
 router.post('/createNote',NoteControler.createNote);
 router.put('/updateNote',NoteControler.updateNote)
 router.put('/favoriteNote',NoteControler.favroiteNote)
-router.put('/archiveNote',NoteControler.archiveNote)
+router.put('/archiveNote',NoteControler.archiveNote);
+router.put('/trashNote',NoteControler.trashNote);
 router.delete('/deleteNote',NoteControler.deleteNote)
 
 module.exports = { router };    

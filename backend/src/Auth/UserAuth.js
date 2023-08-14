@@ -5,7 +5,7 @@ const UserModule = require('../Modules/UserModule');
 const bcrypt = require('bcrypt');
 const generateToken = (userid) => {
     var token = jwt.sign(userid, privateKey, {
-        expiresIn: "11m"
+        expiresIn: "1d"
     });
     console.log(token)
     return token;

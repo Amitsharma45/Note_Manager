@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HOC from '../HOC/HOC'
 import SideBar from '../SideBar/SideBar';
 
 function Contact(props) {
     
+
 
 
     return (

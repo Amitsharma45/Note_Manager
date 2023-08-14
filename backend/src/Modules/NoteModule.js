@@ -13,7 +13,8 @@ const NoteSchema = mongoose.Schema({
                 tittle: String,
                 notebody: String,
                 isFavorite: Boolean,
-                isArchive:Boolean
+                isArchive:Boolean,
+                isTrash:Boolean
             }
             , { timestamps: true }
             )

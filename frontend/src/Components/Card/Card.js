@@ -2,25 +2,26 @@ import React, { useState } from 'react'
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faBoxArchive, faEllipsisVertical, faPenToSquare, faTrashCan, faHeart, faTemperatureHalf } from '@fortawesome/free-solid-svg-icons';
-import { useDeleteNoteMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation } from '../../Feature/ApiSlice';
+import { useDeleteNoteMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation, useIsTrashMutation } from '../../Feature/ApiSlice';
 import EditNote from '../EditNote/EditNote';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Card(props) {
     const { userId } = useSelector(state => state.ToggleSlice)
-    const dispatch = useDispatch();
     const { item } = props;
     const [editToggle, seteditToggle] = useState(false)
     const [deleteNote] = useDeleteNoteMutation();
+    const [trashNote] = useIsTrashMutation();
     const [updateFavorite] = useIsFavoriteNoteMutation();
     const [updateArchive] = useIsArchiveNoteMutation();
-    const DeleteNote = (noteid) => {
-        deleteNote({
+    const TrashNote = (item) => {
+        trashNote({
             "_id": userId,
-            "noteid": noteid
+            "noteid": item._id,
+            isTrash: !item.isTrash
         }).then((data) => {
-            toast.success('Note Delete Success', {
+            toast.success('Note Trash Success', {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -90,10 +91,12 @@ function Card(props) {
                             }} >
                                 <FontAwesomeIcon icon={faPenToSquare} className='mr-2' />Edit
                             </li>
-                            <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3 " onClick={() => DeleteNote(item._id)} >
-                                <FontAwesomeIcon icon={faTrashCan} className='mr-2' />Delete
+                            <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3 " 
+                            onClick={() => TrashNote(item)} >
+                                <FontAwesomeIcon icon={faTrashCan} className='mr-2' />Trash
                             </li>
-                            <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3 " onClick={() => updateisArchive(item)} >
+                            <li className="block  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 px-3 " 
+                            onClick={() => updateisArchive(item)} >
                                 <FontAwesomeIcon icon={faBoxArchive} className='mr-2' />Archive
                             </li>
 

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { DotWave } from '@uiball/loaders'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import AddNote from '../AddNote/AddNote';
 import Card from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,14 @@ import SideBar from '../SideBar/SideBar';
 import HOC from '../HOC/HOC';
 function Home(props) {
     const dispatch = useDispatch();
-    const {data,isLoading} = props;
-    function isArchive(item) {
-        if (!item.isArchive ) {
-            return <Card item={item} key={item._id} />;
-        }
-        return
-    }
+    const { data, isLoading } = props;
+    const [maindata, setmaindata] = useState([]);
+    useEffect(() => {
+        const temp = data?.notes?.filter((item) => !item.isArchive && !item.isTrash)
+        setmaindata(temp)
+    }, [data])
+    
+    
     const { addNote } = useSelector(state => state.ToggleSlice)
     return (
         <>
@@ -59,11 +60,11 @@ function Home(props) {
                             ) : (
                                 <div className='flex flex-wrap lg:justify-around items-center justify-center h-min-11 m-5 mt-2'>
                                     {
-                                        data.notes !== undefined && data?.notes?.length !== 0 ? (
+                                        maindata !== undefined && maindata?.length !== 0 ? (
                                             <>
                                                 {
-                                                    data !== undefined && data?.notes?.map((item) =>
-                                                        isArchive(item)
+                                                    maindata !== undefined && maindata?.map((item) =>
+                                                        <Card item={item} key={item._id} />
                                                     )
                                                 }
                                             </>
@@ -81,4 +82,4 @@ function Home(props) {
     )
 }
 
-export default  HOC(Home)
+export default HOC(Home)

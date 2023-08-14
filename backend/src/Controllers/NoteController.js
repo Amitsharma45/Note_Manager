@@ -24,7 +24,6 @@ const getNotes = (req, res) => {
         })
 }
 const updateNote = (req, res) => {
-    console.log(req.body)
     repo.updateNote(req)
         .then((data) => {
             res.status(200).send({
@@ -37,7 +36,6 @@ const updateNote = (req, res) => {
         })
 }
 const favroiteNote = (req, res) => {
-    console.log(req.body)
     repo.favroiteNote(req)
         .then((data) => {
             res.send(data)
@@ -48,8 +46,16 @@ const favroiteNote = (req, res) => {
 }
 
 const archiveNote = (req, res) => {
-    console.log(req.body)
     repo.archiveNote(req)
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+}
+const trashNote = (req, res) => {
+    repo.trashNote(req)
         .then((data) => {
             res.send(data)
         })
@@ -69,4 +75,4 @@ const deleteNote = (req, res) => {
             res.status(404).send("Error")
         })
 }
-module.exports = { createNote, favroiteNote, archiveNote ,getNotes, deleteNote, updateNote };
+module.exports = { createNote, favroiteNote, archiveNote ,getNotes, deleteNote, trashNote,updateNote };
