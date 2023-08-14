@@ -10,7 +10,7 @@ import FavoriteNote from './Components/FavoriteNotes/FavoriteNotes';
 import ArchiveNote from './Components/ArchiveNote/ArchiveNote';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import ProfilePage from './Components/ProfilePage/ProfilePage';
+import Contact from './Components/Contact/Contact';
 
 function App() {
   const [loading, setloading] = useState(true);
@@ -38,7 +38,7 @@ function App() {
                 <Route path='/Register' element={<Register />} />
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path='/home' element={<Home />} />
-                <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/Contact' element={<Contact />} />
                 <Route path='/favoriteNote' element={<FavoriteNote />} />
                 <Route path='/archiveeNote' element={<ArchiveNote />} />
               </Routes>

@@ -1,9 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNotesMedical, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
+import { faNotesMedical,faIdBadge, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-export default function SideBar() {
+import HOC from '../HOC/HOC';
+import moment from 'moment';
+function SideBar(props) {
+    const { result } = props;
+    const { data } = result;
     const [menu, setmenu] = React.useState(true);
     function logout() {
         localStorage.removeItem('JWT');
@@ -47,9 +51,22 @@ export default function SideBar() {
                 </button>
             </div>
             <div className={`pt-8  ${menu ? 'hidden' : 'block'} h-screen md:block px-2`}>
-                <Link to='/profile' className='w-full  border-b-[2px] border-b-slate-900 flex items-center hover:bg-slate-100 hover:dark:bg-slate-800  text-black   dark:text-white px-2 py-4 ' >
-                    <div className='justify-center items-center mr-2  flex rounded-full h-10 w-10 bg-gray-200 dark:bg-slate-800'>AS</div>
-                    <span className='text-xl'> User Profile</span>
+                <Link className='w-full  border-b-[2px] border-b-slate-900 flex  hover:bg-slate-100 hover:dark:bg-slate-800  text-black   dark:text-white px-2 py-4  flex-col' >
+                    <div className='flex items-center'>
+                        <div className='justify-center items-center mr-2  flex rounded-full h-10 w-10 bg-gray-200 dark:bg-slate-800'>{data?.data?.fullname[0]}</div>
+                        <span className='text-xl'> {data?.data?.fullname}</span>
+                    </div>
+                    <div className='mt-4 text-center'>
+                        <div className='my-2'>
+                            Email I'D : {data?.data?.email}
+                        </div>
+                        <div>
+                            Accout Created On:
+                            <div>
+                                {moment(data?.data?.createdAt).format('DD-MM-YYYY')}
+                            </div>
+                        </div>
+                    </div>
                 </Link>
                 <Link to='/home' className='w-full border-b-gray-700 dark:border-b-white inline-block border-b-[2px] hover:bg-slate-100 hover:dark:bg-slate-800  dark:text-white   py-4 pl-4' >
                     <FontAwesomeIcon icon={faNotesMedical} className='mr-2' />
@@ -71,6 +88,10 @@ export default function SideBar() {
                     <FontAwesomeIcon icon={faTrashCan} className='mr-2' />
                     Bin
                 </Link>
+                <Link to='/Contact' className='w-full border-b-gray-700 dark:border-b-white inline-block border-b-[2px] hover:bg-slate-100 hover:dark:bg-slate-800  dark:text-white   py-4 pl-4' >
+                    <FontAwesomeIcon icon={faIdBadge} className='mr-2' />
+                    Contact Us
+                </Link>
                 <Link to='/login' onClick={logout} className='border-b-[2px] border-b-gray-700 dark:border-b-white inline-block hover:bg-slate-100 hover:dark:bg-slate-800 dark:text-white  w-full py-4 pl-4' >
                     <FontAwesomeIcon icon={faArrowRightFromBracket} className='mr-2' />
                     Log Out
@@ -79,3 +100,5 @@ export default function SideBar() {
         </div>
     )
 }
+
+export default HOC(SideBar)
