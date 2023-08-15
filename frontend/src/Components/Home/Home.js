@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { DotWave } from '@uiball/loaders'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import AddNote from '../AddNote/AddNote';
 import Card from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToggles } from '../../Feature/toggleSlice';
 import SideBar from '../SideBar/SideBar';
 import HOC from '../HOC/HOC';
+
 function Home(props) {
     const dispatch = useDispatch();
     const { data, isLoading } = props;
@@ -16,8 +15,8 @@ function Home(props) {
         const temp = data?.notes?.filter((item) => !item.isArchive && !item.isTrash)
         setmaindata(temp)
     }, [data])
-    
-    
+
+
     const { addNote } = useSelector(state => state.ToggleSlice)
     return (
         <>
@@ -31,8 +30,10 @@ function Home(props) {
                         <button className='bg-secondarylight dark:bg-slate-700 hover:opacity-60 dark:hover:bg-slate-400 dark:text-white  text-xl w-full py-4 rounded-lg text-start pl-9  ' onClick={() => {
                             dispatch(addToggles())
                         }}>
-                            <FontAwesomeIcon icon={faCirclePlus} className='mr-5' />
-                            Add Note
+
+                            <img src={'https://cdn-icons-png.flaticon.com/512/1024/1024824.png'} className='w-11 h-11 inline-block mr-5' />
+                            <span className='text-2xl'> Add Note</span>
+
                         </button>
                         {
                             addNote ? (

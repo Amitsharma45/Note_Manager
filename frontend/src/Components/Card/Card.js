@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faBoxArchive, faEllipsisVertical, faPenToSquare, faTrashCan, faHeart, faTemperatureHalf } from '@fortawesome/free-solid-svg-icons';
-import { useDeleteNoteMutation, useIsArchiveNoteMutation, useIsFavoriteNoteMutation, useIsTrashMutation } from '../../Feature/ApiSlice';
+import {  useIsArchiveNoteMutation, useIsFavoriteNoteMutation, useIsTrashMutation } from '../../Feature/ApiSlice';
 import EditNote from '../EditNote/EditNote';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Card(props) {
     const { userId } = useSelector(state => state.ToggleSlice)
     const { item } = props;
     const [editToggle, seteditToggle] = useState(false)
-    const [deleteNote] = useDeleteNoteMutation();
     const [trashNote] = useIsTrashMutation();
-    const [updateFavorite] = useIsFavoriteNoteMutation();
-    const [updateArchive] = useIsArchiveNoteMutation();
+    const [updateFavorite ] = useIsFavoriteNoteMutation();
+    const [updateArchive ] = useIsArchiveNoteMutation();
     const TrashNote = (item) => {
         trashNote({
             "_id": userId,

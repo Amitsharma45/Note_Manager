@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNotesMedical, faDownLong, faIdBadge, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
+import { faNotesMedical, faDownLong, faUpLong,faIdBadge, faArrowRightFromBracket, faTrashCan, faThumbtack, faShare, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import HOC from '../HOC/HOC';
 import moment from 'moment';
+import Img from './img.png'
+
 function SideBar(props) {
     const { result } = props;
     const { data } = result;
@@ -22,6 +25,7 @@ function SideBar(props) {
             theme: "light",
         });
     }
+    const [toggle, settoggle] = React.useState(false);
     return (
         <div className={`md:w-auto ${menu ? 'w-[50px]' : 'w-[300px]'}  rounded-xl dark:bg-slate-700 bg-secondarylight   transition-transform ease-in-out duration-300 `} onClick={() => setmenu(!menu)}>
             <div className='text-4xl h-[50px] px-2 text-slate-900 dark:text-white md:hidden  block bg-secondarylight dark:bg-slate-900' >
@@ -50,20 +54,27 @@ function SideBar(props) {
                     </svg>
                 </button>
             </div>
-            <div className={`pt-8  ${menu ? 'hidden' : 'block'} h-screen md:block px-2`}>
+            <div className={`pt-8  ${menu ? 'hidden' : 'block'}  md:block px-2`}>
                 <Link className='w-full   flex   text-black   dark:text-white px-2 py-4  flex-col' >
-                    <div className='flex items-center border-b-[2px] pb-1 border-b-slate-900'>
+                    <div className='flex items-center border-b-[2px] pb-1 border-b-slate-900' onClick={() => settoggle(!toggle)}>
                         <div className='justify-center items-center text-2xl  flex rounded-full h-[45px] w-[55px] bg-gray-200 dark:bg-slate-800'>{data?.data?.fullname[0]}</div>
                         <div className='w-full flex justify-between items-center  px-1 '>
                             <span className='text-2xl'> {data?.data?.fullname}</span>
-                            <FontAwesomeIcon icon={faDownLong} className=' text-sm '  />
+                            {
+                                !toggle ?
+                                    <FontAwesomeIcon icon={faDownLong} className=' text-sm ' /> :
+                                    <FontAwesomeIcon icon={faUpLong} className=' text-sm ' />
+                                    
+                            }
+
                         </div>
                     </div>
-                    <div className='pb-2 hidden mt-4 text-center  border-b-[2px] border-b-slate-900'>
-                        <div className='my-2'>
-                            Email I'D : {data?.data?.email}
+                    <div className={`${toggle ? 'h-[110px]' : "h-[0px]"} overflow-hidden transition-all ease-in-out duration-
+                    700  text-center   `}>
+                        <div className=' mt-2'>
+                            Email I'D : <span className='text-sm'> {data?.data?.email}</span>
                         </div>
-                        <div>
+                        <div className='border-b-[2px] border-b-slate-900'>
                             Accout Created On:
                             <div>
                                 {moment(data?.data?.createdAt).format('DD-MM-YYYY')}
@@ -96,6 +107,7 @@ function SideBar(props) {
                     <FontAwesomeIcon icon={faArrowRightFromBracket} className='mr-2' />
                     Log Out
                 </Link>
+                <img src={Img}  className='mt-5 w-[190px] h-[170px] mx-auto' />
             </div>
         </div>
     )
