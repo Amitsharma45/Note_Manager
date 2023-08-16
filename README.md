@@ -1,38 +1,48 @@
 # Note Manager Project
 
-![Note Manager Screenshot]
+![Note Manager Screenshot](screenshot.png)
 
-## Overview
-
-Note Manager is a web application built using the MERN (MongoDB, Express.js, React, Node.js) stack that allows users to manage and organize their notes. This application provides an intuitive interface for creating, updating, and deleting notes.
+Note Manager is a web application built using the MERN (MongoDB, Express.js, React, Node.js) stack that enables users to manage and organize their notes effectively. With an intuitive interface and versatile features, Note Manager simplifies note-taking and organization.
 
 ## Features
 
-- User Authentication: Users can create accounts and log in securely to access their notes.
-- Create and Edit Notes: Users can create new notes and edit existing ones with a title and content.
-- Delete Notes: Users have the ability to delete unwanted notes.
-- Responsive Design: The application is designed to work seamlessly on various devices and screen sizes.
+- **User Authentication:** Create accounts and log in securely to access your notes.
+- **Create and Edit Notes:** Craft new notes and modify existing ones with titles and content.
+- **Delete and Archive:** Dispose of unnecessary notes or archive ones that are no longer active.
+- **Favorite Notes:** Pin essential notes to the favorite list for easy reference.
+- **Responsive Design:** Experience seamless usage across various devices and screen sizes.
 
 ## Technologies Used
 
-- MongoDB: A NoSQL database used to store note data.
-- Express.js: A web application framework for building APIs.
-- React: A JavaScript library for building user interfaces.
-- Node.js: A runtime environment for server-side JavaScript.
-- HTML & CSS: Markup and styling for the user interface.
-- Tailwind CSS: A CSS framework for responsive design.
-- Authentication: Used JWT (JSON Web Tokens) and passport JS for user authentication .
+- **Frontend:**
+  - React: Building dynamic and interactive user interfaces.
+  - Tailwind CSS: Styling for appealing and responsive designs.
+- **Backend:**
+  - Node.js: Runtime environment for server-side JavaScript.
+  - Express.js: Handling APIs and backend processes.
+  - MongoDB: Efficiently storing note data using a NoSQL database.
+- **Authentication:**
+  - JWT (JSON Web Tokens): Ensuring secure user authentication.
+  - Passport.js: Simplifying authentication procedures.
 
 ## Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/Amitsharma45/note-manager.git`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Amitsharma45/Note_Manager.git
+
 2. Navigate to the project directory: `cd note-manager`
-3. Install server dependencies: `npm install`
-4. Navigate to the `client` directory: `cd client`
-5. Install client dependencies: `npm install`
-6. Go back to the project root: `cd ..`
-7. Rename `.env.example` to `.env` and provide your MongoDB URI and other environment variables.
-8. Start the development server: `npm run dev`
+3. Install frontend dependencies:
+* Navigate to the `frontend` directory: `cd frontend`
+* Run `npm install` to install the required packages.
+4. Install backend dependencies:
+* Navigate to the `backend` directory: `cd backend`
+* Run `npm install` to install the required packages.
+5. Create a `.env `file in the backend directory and provide the necessary environment variables, including the MongoDB URI.
+
+6. Start the frontend and backend servers:
+*   In the `frontend` directory, run `npm start`.
+*   In the `backend` directory, run `npm start`.
 
 ## Usage
 
@@ -40,13 +50,7 @@ Note Manager is a web application built using the MERN (MongoDB, Express.js, Rea
 2. Register for a new account or log in if you already have one.
 3. Start managing your notes by creating, editing, and deleting them.
 
-## Acknowledgments
-
-- This project was inspired by [mention any inspirations or similar projects].
-- Special thanks to [mention anyone you want to acknowledge, such as contributors or libraries used].
-
-
-
 ---
+
 
 Feel free to customize this `README.md` template with more specific information about your project, such as deployment instructions, troubleshooting, additional screenshots, and anything else you'd like to share.
