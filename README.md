@@ -2,6 +2,7 @@
 
 ![Note Manager Screenshot](screenshot.png)
 
+
 Note Manager is a web application built using the MERN (MongoDB, Express.js, React, Node.js) stack that enables users to manage and organize their notes effectively. With an intuitive interface and versatile features, Note Manager simplifies note-taking and organization.
 
 ## Features
