@@ -51,6 +51,4 @@ Note Manager is a web application built using the MERN (MongoDB, Express.js, Rea
 3. Start managing your notes by creating, editing, and deleting them.
 
 ---
-
-
 Feel free to customize this `README.md` template with more specific information about your project, such as deployment instructions, troubleshooting, additional screenshots, and anything else you'd like to share.
